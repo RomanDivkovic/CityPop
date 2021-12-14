@@ -1,11 +1,17 @@
 import React from 'react'
 import { View, StyleSheet, Text, Pressable, GestureResponderEvent } from 'react-native'
 
-export default function CustomButton(props: { onPress: ((event: GestureResponderEvent) => void) | null | undefined }) {
+// type Props {
+//    onPress: (event: GestureResponderEvent) => void
+// }
+
+
+export default function CustomButton(props: { onPress: ((event: GestureResponderEvent) => void) | null | undefined; title: boolean | React.ReactChild | React.ReactFragment | React.ReactPortal | null | undefined }) {
   return (
     <View style={styles.viewBackground}>
       <Pressable
         onPress={props.onPress}
+        
         style={({ pressed }) => [
           {
             backgroundColor: pressed ? 'lightgrey' : '#0077b6'
@@ -13,7 +19,7 @@ export default function CustomButton(props: { onPress: ((event: GestureResponder
           styles.viewButton
         ]}
       >
-        <Text style={styles.buttonText}>Next</Text>
+        <Text style={styles.buttonText}>{props.title}</Text>
       </Pressable>
     </View>
   )

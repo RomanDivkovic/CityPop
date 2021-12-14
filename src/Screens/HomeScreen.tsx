@@ -19,7 +19,8 @@ export default function HomeScreen() {
         <Text style={styles.text}>Homescreen</Text>
         <CustomButton  onPress={() => {
           navigation.navigate('City')
-        }}/>
+        }}
+        title="Search for city"/>
       </View>
     </SafeAreaView>
 
