@@ -7,11 +7,12 @@ import {RootStackParamList} from './RootStackParam';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 
-
+// Navigation
 type authScreenProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
-
+/* HomeScreen where user should have option to choose to search for population either by city by country and then choosing city */
 export default function HomeScreen() {
+  // Navigation
   const navigation = useNavigation<authScreenProp>();
   return (
     <SafeAreaView>
@@ -21,12 +22,18 @@ export default function HomeScreen() {
           navigation.navigate('City')
         }}
         title="Search for city"/>
+        <CustomButton  onPress={() => {
+          alert('Need to search for country first')
+        }}
+        title="Search for country"/>
       </View>
+      
     </SafeAreaView>
 
   )
 }
 
+// Design
 const styles = StyleSheet.create({
   container: {
     flex: 1,

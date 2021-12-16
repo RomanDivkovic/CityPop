@@ -1,11 +1,63 @@
-import React from "react"
-import { StyleSheet, View, Text } from "react-native"
+import React, { useEffect, useState } from "react"
+import { StyleSheet, View, Text, FlatList } from "react-native"
+import { useNavigation } from '@react-navigation/native'
+import {RootStackParamList} from './RootStackParam'
+import {StackNavigationProp} from '@react-navigation/stack'
+import axios from 'axios'
+
+/* ResultScreen to show Search for popluation in an City from a user search */
+
+type authScreenProp = StackNavigationProp<RootStackParamList, 'Result'>;
+
+interface Provider {
+  toponymName: string;
+  countryId: string;
+  population: string;
+}
+
+interface Props {
+    route: string;
+}
 
 
-export default function ResultScreen() {
+export default function ResultScreen({ ...Props }) {
+    const navigation = useNavigation<authScreenProp>();
+    const city = Props.route.params.city
+    const [result, setResult] = useState<Provider[]>([])
+
+        useEffect(() => {
+            const searchApi = async () => {
+                try {
+                    const response = await axios.get('http://api.geonames.org/searchJSON?q=' +city+'&username=romandivkovic')
+                    setResult(response.data)
+                   console.log(result.length)
+                    // console.log('************    **************************************')
+                } catch (error) {
+                    if (axios.isCancel(error)) {
+                    console.log('Data fetching cancelled')
+                    } else {
+                    console.log('Something went wrong here is an error message: '+error)
+                    }
+                }     
+            }           
+    searchApi()
+        }, [])
+
     return (
         <View>
             <Text style={styles.text}>ResultScreen</Text>
+            <Text style={{ fontSize: 18, fontWeight: 'bold'}}>This was the searched city: {city}</Text>
+            <Text>{result.length}</Text>
+            <FlatList
+                data={result}
+                renderItem={({ item }) => (
+                <View >
+                    {/* <Text style={styles.text}>Type: {item.geonames[0].population}</Text> */}
+                    <Text>{item.population}</Text>
+                </View>
+                )}
+                keyExtractor={(key) => key.countryId}
+            />
         </View>
     )
 }
@@ -14,6 +66,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 20,
     textAlign: 'center',
-    
   }
 })
+

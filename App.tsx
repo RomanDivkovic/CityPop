@@ -8,7 +8,7 @@ import ResultScreen from './src/Screens/ResultScreen';
 
 const Stack = createNativeStackNavigator()
 
-
+/* My app starts here with my screens */
 export default function App() {
 
   return (
@@ -20,15 +20,6 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
 
-    // <View>
-    //   <Text>Hello</Text>
-    // </View>
-    // <NavigationContainer>
-    //   <Stack.Screen
-    //       name="Home"
-    //       component={HomeScreen}
-    //     />
-    // </NavigationContainer>
   )
 }
 

@@ -8,29 +8,24 @@ import {RootStackParamList} from './RootStackParam';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 
-
+// For navigation
 type authScreenProp = StackNavigationProp<RootStackParamList, 'City'>;
 
+interface Provider {
+  toponymName: string;
+  countryId: string;
+  population: string;
+}
+
+/* CityScreen to Search for city and get data from geonams api to send to resultscreen, using axios */
+
 export default function HomeScreen() {
+    // Navigation
     const navigation = useNavigation<authScreenProp>();
+    // To get the data
     const [City, setCity] = useState('');
-    const [result, setResult] = useState([])
-    //     useEffect(() => {
-    //         const searchApi = async () => {
-    //   try {
-    //     const response = await axios.get('http://api.geonames.org/search?q=Paris&username=romandivkovic')
-    //     // setResult(response.data)
-    //     console.log(response.data)
-    //   } catch (error) {
-    //     if (axios.isCancel(error)) {
-    //       console.log('Data fetching cancelled')
-    //     } else {
-    //       console.log('Error: '+error)
-    //     }
-    //   }
-    // }
-    // searchApi()
-    //     }, [])
+    const [result, setResult] = useState<Provider[]>()
+    
   return (
     <SafeAreaView>
       <View>
@@ -43,21 +38,25 @@ export default function HomeScreen() {
         
         />
         <CustomButton title="Search"
+        // onPress={getCityFromSearch}
           onPress={() => {
-          navigation.navigate('Result')
+            navigation.navigate('Result', {
+              city: City
+            })
           
-        }}
+          }}
         />
       </View>
     </SafeAreaView>
 
   )
   function getCityFromSearch() {
+    // Calling axios to get data from geonames API here and storing it in usestate result
     const searchApi = async () => {
       try {
-        const response = await axios.get('http://api.geonames.org/search?q=' +City+'s&username=romandivkovic')
+        const response = await axios.get('http://api.geonames.org/searchJSON?q=' +City+'s&username=romandivkovic')
         setResult(response.data)
-        console.log(result)
+        console.log(response.data)
       } catch (error) {
         if (axios.isCancel(error)) {
           console.log('Data fetching cancelled')
@@ -67,12 +66,15 @@ export default function HomeScreen() {
       }
     }
     searchApi()
-
+    navigation.navigate('Result', {
+           city: City
+    })
 
     
   }
 }
 
+// Design
 const styles = StyleSheet.create({
   container: {
     flex: 1,
