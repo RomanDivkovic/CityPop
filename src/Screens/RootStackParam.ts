@@ -4,6 +4,7 @@
 export type RootStackParamList = {
 Home: undefined;
 City: undefined;
+Country: undefined;
 Result: {
     city: string;
 };

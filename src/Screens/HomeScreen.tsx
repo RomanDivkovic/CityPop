@@ -23,7 +23,7 @@ export default function HomeScreen() {
         }}
         title="Search for city"/>
         <CustomButton  onPress={() => {
-          alert('Need to search for country first')
+          navigation.navigate('Country')
         }}
         title="Search for country"/>
       </View>
