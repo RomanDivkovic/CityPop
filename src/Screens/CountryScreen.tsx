@@ -1,10 +1,18 @@
 import React, { useState } from "react"
 import { StyleSheet, View, Text, TextInput } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
+import CustomButton from '../components/button'
+import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import {RootStackParamList} from './RootStackParam'
+import {StackNavigationProp} from '@react-navigation/stack'
 
+
+type authScreenProp = StackNavigationProp<RootStackParamList, 'Country'>;
 
 export default function CountryScreen(){
       const [Country, setCountry] = useState('');
+    // To navigate
+    const navigation = useNavigation<authScreenProp>();
     return(
         <SafeAreaView>
             <View>
@@ -14,8 +22,12 @@ export default function CountryScreen(){
                     onChangeText={setCountry}
                     value={Country}
                     placeholder="Search for a country"
-        
                 />
+                <CustomButton title="Search" onPress={() => {
+                    navigation.navigate("CountryResult", {
+                        countrySearch: Country
+                    })
+                }}/>
             </View>
         </SafeAreaView>
         

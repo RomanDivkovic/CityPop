@@ -1,11 +1,12 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native'
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import HomeScreen from './src/Screens/HomeScreen'
 import CityScreen from './src/Screens/CityScreen'
-import ResultScreen from './src/Screens/ResultScreen';
-import CountryScreen from './src/Screens/CountryScreen';
+import ResultScreen from './src/Screens/ResultScreen'
+import CountryScreen from './src/Screens/CountryScreen'
+import CountryResultScreen from './src/Screens/CountryResultScreen'
 
 const Stack = createNativeStackNavigator()
 
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen name="City" component={CityScreen} />
         <Stack.Screen name="Result" component={ResultScreen} />
         <Stack.Screen name="Country" component={CountryScreen}/>
+        <Stack.Screen name="CountryResult" component={CountryResultScreen} />
       </Stack.Navigator>
     </NavigationContainer>
 

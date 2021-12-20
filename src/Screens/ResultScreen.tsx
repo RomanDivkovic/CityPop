@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { StyleSheet, View, Text, FlatList } from "react-native"
+import { StyleSheet, View, Text } from "react-native"
 import { useNavigation } from '@react-navigation/native'
 import {RootStackParamList} from './RootStackParam'
 import {StackNavigationProp} from '@react-navigation/stack'
@@ -45,9 +45,9 @@ export default function ResultScreen({ ...Props }) {
         }, [])
 
     return (
-        <View>
+        <View>       
             <Text style={{marginTop: 50, fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>{city}</Text>
-            <Text style={styles.text}>{result}</Text>
+            <Text style={styles.text}>{result}</Text>    
         </View>
     )
 }
