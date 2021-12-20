@@ -46,18 +46,8 @@ export default function ResultScreen({ ...Props }) {
 
     return (
         <View>
-            {/* <Text style={styles.text}>ResultScreen</Text> */}
             <Text style={{marginTop: 50, fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>{city}</Text>
             <Text style={styles.text}>{result}</Text>
-            {/* <FlatList
-                data={result}
-                renderItem={({ item }) => (
-                <View >
-                    <Text>{item.population}</Text>
-                </View>
-                )}
-                keyExtractor={(key) => key.fcode}
-            /> */}
         </View>
     )
 }
