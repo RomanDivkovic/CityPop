@@ -11,8 +11,10 @@ type authScreenProp = StackNavigationProp<RootStackParamList, 'Result'>;
 
 interface Provider {
   toponymName: string;
-  countryId: string;
+  fcode: string;
   population: string;
+  geonames: string;
+ 
 }
 
 interface Props {
@@ -29,9 +31,8 @@ export default function ResultScreen({ ...Props }) {
             const searchApi = async () => {
                 try {
                     const response = await axios.get('http://api.geonames.org/searchJSON?q=' +city+'&username=romandivkovic')
-                    setResult(response.data)
-                   console.log(result.length)
-                    // console.log('************    **************************************')
+                    setResult(response.data.geonames[0].population)
+                   console.log('Population: ',result)
                 } catch (error) {
                     if (axios.isCancel(error)) {
                     console.log('Data fetching cancelled')
@@ -45,25 +46,24 @@ export default function ResultScreen({ ...Props }) {
 
     return (
         <View>
-            <Text style={styles.text}>ResultScreen</Text>
-            <Text style={{ fontSize: 18, fontWeight: 'bold'}}>This was the searched city: {city}</Text>
-            <Text>{result.length}</Text>
-            <FlatList
+            {/* <Text style={styles.text}>ResultScreen</Text> */}
+            <Text style={{marginTop: 50, fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>{city}</Text>
+            <Text style={styles.text}>{result}</Text>
+            {/* <FlatList
                 data={result}
                 renderItem={({ item }) => (
                 <View >
-                    {/* <Text style={styles.text}>Type: {item.geonames[0].population}</Text> */}
                     <Text>{item.population}</Text>
                 </View>
                 )}
-                keyExtractor={(key) => key.countryId}
-            />
+                keyExtractor={(key) => key.fcode}
+            /> */}
         </View>
     )
 }
 const styles = StyleSheet.create({
   text: {
-    marginTop: 20,
+    marginTop: 100,
     fontSize: 20,
     textAlign: 'center',
   }
