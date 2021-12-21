@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomButton from '../components/button'
 import { useNavigation } from '@react-navigation/native'
-import { RootStackParamList } from './RootStackParam'
+import { RootStackParamList } from '../utils/RootStackParam'
 import { StackNavigationProp } from '@react-navigation/stack'
+import TextInput from '../components/textInput'
 
 
 // For navigation
@@ -23,13 +24,14 @@ export default function HomeScreen() {
     <SafeAreaView>
       <View>
         <Text style={styles.text}>Search by City</Text>
-         <TextInput
+        <TextInput onChangeText={setCity} value={City} placeholder='Search for a city'/>
+         {/* <TextInput
             style={styles.input}
             onChangeText={setCity}
             value={City}
             placeholder="Search for city"
         
-        />
+        /> */}
         <CustomButton title="Search"
         // onPress={getCityFromSearch}
           onPress={() => {

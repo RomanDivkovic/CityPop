@@ -2,7 +2,7 @@ import React, { useEffect, useState} from "react"
 import { StyleSheet, Text, View, FlatList } from "react-native"
 import CustomButton from '../components/button'
 import { useNavigation } from '@react-navigation/native'
-import {RootStackParamList} from './RootStackParam'
+import {RootStackParamList} from '../utils/RootStackParam'
 import {StackNavigationProp} from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import axios from 'axios'

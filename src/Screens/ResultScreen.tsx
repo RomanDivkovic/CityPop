@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import { StyleSheet, View, Text } from "react-native"
 import { useNavigation } from '@react-navigation/native'
-import {RootStackParamList} from './RootStackParam'
+import {RootStackParamList} from '../utils/RootStackParam'
 import {StackNavigationProp} from '@react-navigation/stack'
 import axios from 'axios'
+import api from '../api/api'
 
 /* ResultScreen to show Search for popluation in an City from a user search */
 
@@ -27,22 +28,22 @@ export default function ResultScreen({ ...Props }) {
     const city = Props.route.params.city
     const [result, setResult] = useState<Provider[]>([])
 
-        useEffect(() => {
-            const searchApi = async () => {
-                try {
-                    const response = await axios.get('http://api.geonames.org/searchJSON?q=' +city+'&username=romandivkovic')
-                    setResult(response.data.geonames[0].population)
+    useEffect(() => {
+        const citySearch = async () => {
+            try {
+                const response = await api.get(city+'&username=romandivkovic')
+                 setResult(response.data.geonames[0].population)
                    console.log('Population: ',result)
-                } catch (error) {
-                    if (axios.isCancel(error)) {
+            } catch(error) {
+                if (axios.isCancel(error)) {
                     console.log('Data fetching cancelled')
                     } else {
                     console.log('Something went wrong here is an error message: '+error)
                     }
-                }     
-            }           
-    searchApi()
-        }, [])
+            }
+        }
+        citySearch()
+    }, [])
 
     return (
         <View>       
