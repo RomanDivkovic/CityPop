@@ -16,24 +16,16 @@ type authScreenProp = StackNavigationProp<RootStackParamList, 'City'>;
 export default function HomeScreen() {
     // Navigation
     const navigation = useNavigation<authScreenProp>();
-    // To get the data
+    // To get the city that user wants to search, send this to result screen to display
     const [City, setCity] = useState('');
-    // const [result, setResult] = useState<Provider[]>()
     
+    // What is displayed on this screen
   return (
     <SafeAreaView>
       <View>
         <Text style={styles.text}>Search by City</Text>
         <TextInput onChangeText={setCity} value={City} placeholder='Search for a city'/>
-         {/* <TextInput
-            style={styles.input}
-            onChangeText={setCity}
-            value={City}
-            placeholder="Search for city"
-        
-        /> */}
-        <CustomButton title="Search"
-        // onPress={getCityFromSearch}
+        <CustomButton title="Search" 
           onPress={() => {
             navigation.navigate('Result', {
               city: City
@@ -50,18 +42,11 @@ export default function HomeScreen() {
 
 // Design
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   text: {
     fontSize: 24,
     textAlign: 'center',
     marginTop: 10,
-    fontWeight: 'bold'
-    
+    fontWeight: 'bold'   
   },
   input: {
     height: 40,

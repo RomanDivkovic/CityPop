@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { StyleSheet, View, Text } from "react-native"
-import { useNavigation } from '@react-navigation/native'
-import {RootStackParamList} from '../utils/RootStackParam'
-import {StackNavigationProp} from '@react-navigation/stack'
 import axios from 'axios'
 import api from '../api/api'
 
 /* ResultScreen to show Search for popluation in an City from a user search */
-
-type authScreenProp = StackNavigationProp<RootStackParamList, 'Result'>;
 
 interface Provider {
   toponymName: string;
@@ -24,16 +19,17 @@ interface Props {
 
 
 export default function ResultScreen({ ...Props }) {
-    const navigation = useNavigation<authScreenProp>();
+    // The city that is passed on from cityscreen that user searched for
     const city = Props.route.params.city
+    // to get the API result and display it
     const [result, setResult] = useState<Provider[]>([])
 
+    // API call to get population from the city
     useEffect(() => {
         const citySearch = async () => {
             try {
                 const response = await api.get(city+'&username=romandivkovic')
                  setResult(response.data.geonames[0].population)
-                   console.log('Population: ',result)
             } catch(error) {
                 if (axios.isCancel(error)) {
                     console.log('Data fetching cancelled')
@@ -45,6 +41,7 @@ export default function ResultScreen({ ...Props }) {
         citySearch()
     }, [])
 
+    // What is shown in this screen
     return (
         <View>       
             <Text style={{marginTop: 50, fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>{city}</Text>

@@ -2,18 +2,21 @@ import React, { useState } from "react"
 import { StyleSheet, View, Text } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomButton from '../components/button'
-import { NavigationContainer, useNavigation } from '@react-navigation/native'
+import { useNavigation } from '@react-navigation/native'
 import {RootStackParamList} from '../utils/RootStackParam'
 import {StackNavigationProp} from '@react-navigation/stack'
 import TextInput from '../components/textInput'
 
-
+// Navigation
 type authScreenProp = StackNavigationProp<RootStackParamList, 'Country'>;
 
 export default function CountryScreen(){
+    // Getting the country from the textinput from the user
       const [Country, setCountry] = useState('');
     // To navigate
     const navigation = useNavigation<authScreenProp>();
+
+    // What this screen displays
     return(
         <SafeAreaView>
             <View>

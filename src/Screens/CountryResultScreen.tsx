@@ -5,49 +5,51 @@ import { useNavigation } from '@react-navigation/native'
 import {RootStackParamList} from '../utils/RootStackParam'
 import {StackNavigationProp} from '@react-navigation/stack'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import axios from 'axios'
+import api from '../api/api'
+import axios from "axios"
 
 interface Provider {
   name: string;
   fcode: string;
   population: string;
   geonames: string;
-  toponymName: string;
   geonameId: Number;
- 
 }
 
 interface Props {
     route: string;
 }
 
+// For navigation
 type authScreenProp = StackNavigationProp<RootStackParamList, 'CountryResult'>;
 
 export default function CountryResultScreen({ ...Props }) {
+    // Getting the country that user searched from CountryScreen
     const country = Props.route.params.countrySearch
     const [result, setResult] = useState<Provider[]>([])
     const [thisCountry, setThisCountry] = useState<Provider[]>([])
-    const [City, setCity] = useState('')
+    // Navigation
     const navigation = useNavigation<authScreenProp>();
 
-        useEffect(() => {
-            const searchApi = async () => {
-                try {
-                    const response = await axios.get('http://api.geonames.org/searchJSON?q='+country+'&username=romandivkovic')
-                    setResult(response.data.geonames)
-                    setThisCountry(response.data.geonames[0].countryName)
-                   console.log('Country result in axios call: ',response.data.geonames)
-                } catch (error) {
-                    if (axios.isCancel(error)) {
+    // API call to get countrys cities from geonames
+    useEffect(() => {
+        const citySearch = async () => {
+            try {
+                const response = await api.get(country+'&username=romandivkovic')
+                 setResult(response.data.geonames)
+                 setThisCountry(response.data.geonames[0].countryName)
+            } catch(error) {
+                if (axios.isCancel(error)) {
                     console.log('Data fetching cancelled')
                     } else {
                     console.log('Something went wrong here is an error message: '+error)
                     }
-                }     
-            }           
-    searchApi()
-        }, [])
+            }
+        }
+        citySearch()
+    }, [])
 
+    // What is displayed on this screen
     return (
         <SafeAreaView>
             <View >
@@ -58,7 +60,6 @@ export default function CountryResultScreen({ ...Props }) {
                     renderItem={({ item }) => (
                         <View >
                             <CustomButton title={item.name} onPress={() => {
-                                setCity(item.name)
                                 navigation.navigate('Result', {
                                     city: item.name
                                 })

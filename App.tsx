@@ -16,11 +16,33 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="City" component={CityScreen} />
-        <Stack.Screen name="Result" component={ResultScreen} />
-        <Stack.Screen name="Country" component={CountryScreen}/>
-        <Stack.Screen name="CountryResult" component={CountryResultScreen} />
+        <Stack.Screen
+         name="Home"
+          component={HomeScreen} />
+        <Stack.Screen
+         name="City"
+          component={CityScreen}
+          options={{
+                title: ''
+        }} />
+        <Stack.Screen
+         name="Result"
+          component={ResultScreen}
+          options={{
+                title: ''
+        }} />
+        <Stack.Screen 
+        name="Country"
+         component={CountryScreen}
+         options={{
+                title: ''
+        }}/>
+        <Stack.Screen 
+        name="CountryResult" 
+        component={CountryResultScreen} 
+        options={{
+                title: ''
+        }}/>
       </Stack.Navigator>
     </NavigationContainer>
 
