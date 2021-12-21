@@ -12,6 +12,8 @@ interface Provider {
   fcode: string;
   population: string;
   geonames: string;
+  toponymName: string;
+  geonameId: Number;
  
 }
 
@@ -34,7 +36,7 @@ export default function CountryResultScreen({ ...Props }) {
                     const response = await axios.get('http://api.geonames.org/searchJSON?q='+country+'&username=romandivkovic')
                     setResult(response.data.geonames)
                     setThisCountry(response.data.geonames[0].countryName)
-                   console.log('Country result in acios call: ',result)
+                   console.log('Country result in axios call: ',response.data.geonames)
                 } catch (error) {
                     if (axios.isCancel(error)) {
                     console.log('Data fetching cancelled')
@@ -48,7 +50,7 @@ export default function CountryResultScreen({ ...Props }) {
 
     return (
         <SafeAreaView>
-            <View style={styles.container}>
+            <View >
                 <Text style={styles.text}>{thisCountry}</Text>
                  <FlatList
                  style={styles.List}
@@ -58,12 +60,12 @@ export default function CountryResultScreen({ ...Props }) {
                             <CustomButton title={item.name} onPress={() => {
                                 setCity(item.name)
                                 navigation.navigate('Result', {
-                                    city: City
+                                    city: item.name
                                 })
                             }}/>
                         </View>
                     )}
-                keyExtractor={(key) => key.name}
+                keyExtractor={(key) => key.geonameId.toString()}
                 />
             </View>
         </SafeAreaView>
@@ -74,8 +76,6 @@ export default function CountryResultScreen({ ...Props }) {
 // Design
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    height:'100%',
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'

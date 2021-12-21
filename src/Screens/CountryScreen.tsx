@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native"
 import { SafeAreaView } from 'react-native-safe-area-context'
 import CustomButton from '../components/button'
 import { NavigationContainer, useNavigation } from '@react-navigation/native'
-import {RootStackParamList} from './RootStackParam'
+import {RootStackParamList} from '../utils/RootStackParam'
 import {StackNavigationProp} from '@react-navigation/stack'
 import TextInput from '../components/textInput'
 
@@ -36,7 +36,6 @@ export default function CountryScreen(){
 // Design
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center'
@@ -47,12 +46,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontWeight: 'bold'
     
-  },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    padding: 10,
-    marginTop: 30
-  },
+  }
 })
