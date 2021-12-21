@@ -1,6 +1,7 @@
-
-import React, { } from "react"
+import React from "react"
 import { StyleSheet, View, TextInput } from "react-native"
+
+/* My textinput component that is used in two screens in the application */
 
 export default function textInput(props: { onChangeText: ((text: string) => void) | undefined; value: string | undefined; placeholder: string | undefined }){
     return(

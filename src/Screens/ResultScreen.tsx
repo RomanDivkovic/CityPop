@@ -44,16 +44,43 @@ export default function ResultScreen({ ...Props }) {
     // What is shown in this screen
     return (
         <View>       
-            <Text style={{marginTop: 50, fontSize: 25, fontWeight: 'bold', textAlign: 'center'}}>{city}</Text>
-            <Text style={styles.text}>{result}</Text>    
+            <Text style={styles.city}>{city}</Text>
+            <View style={styles.borderContainer}>
+                <View style={styles.border}>
+                    <Text style={styles.text}>Population</Text> 
+                    <Text style={styles.population}>{result}</Text> 
+                    <Text style={{marginTop: 20}}></Text> 
+                </View>
+            </View>   
         </View>
     )
 }
 const styles = StyleSheet.create({
-  text: {
-    marginTop: 100,
-    fontSize: 20,
+city: {
+    marginTop: 150, 
+    fontSize: 25, 
+    fontWeight: 'bold', 
+    textAlign: 'center'
+    },
+population: {
+    marginTop: 10,
     textAlign: 'center',
-  }
+    fontSize: 25
+ },
+  text: {
+    fontSize: 14,
+    textAlign: 'center',
+  },
+  borderContainer:{
+    marginTop: 70,
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  border:{
+    flex:0.9,
+    borderWidth: 2.5,
+    borderColor: 'black',
+  },
 })
 
